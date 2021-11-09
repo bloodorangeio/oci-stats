@@ -1,5 +1,7 @@
 GITHUB_ORG = opencontainers
 
+SHELL = /usr/bin/env bash
+
 .PHONY: clone-all
 clone-all:
 	[[ -f repos.json ]] || curl -sL -o repos.json https://api.github.com/orgs/$(GITHUB_ORG)/repos

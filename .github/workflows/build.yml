@@ -14,8 +14,9 @@ jobs:
       - name: Generate stats
         run: |
           make gen-stats
+          mv stats.html oci-stats-${{ github.sha }}.html
       - name: Upload stats HTML
         uses: actions/upload-artifact@v2
         with:
           name: oci-stats-${{ github.sha }}
-          path: stats.html
+          path: oci-stats-${{ github.sha }}.html
