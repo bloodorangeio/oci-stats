@@ -1,0 +1,21 @@
+name: build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v2
+      - name: Generate stats
+        run: |
+          make gen-stats
+      - name: Upload stats HTML
+        uses: actions/upload-artifact@v2
+        with:
+          name: oci-stats-${{ github.sha }}
+          path: stats.html
