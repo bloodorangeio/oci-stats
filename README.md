@@ -8,7 +8,7 @@ report summarizing repositories in the
 GitHub organization.
 
 For an example of the report, please see
-[`stats-exammple.html`](./stats-example.html).
+https://bloodorangeio.github.io/oci-stats/.
 
 ## How to use
 
