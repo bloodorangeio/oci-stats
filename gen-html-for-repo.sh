@@ -31,13 +31,13 @@ NO_CIRCLE="$([[ -d repos/${REPO}/.circleci/ ]] && echo ❌ || echo ✅)"
 NO_TRAVIS="$([[ -f repos/${REPO}/.travis.yml ]] && echo ❌ || echo ✅)"
 NO_PULLAPPROVE="$([[ -f repos/${REPO}/.pullapprove.yml ]] && echo ❌ || echo ✅)"
 
-TIME_CREATED="$(extract_field created_at)"
+TIME_CREATED="$(extract_field created_at | sed 's/Z/\+00:00/')"
 
 # This includes updates to PRs, so ignore it
 #TIME_PUSHED="$(extract_field pushed_at)"
-TIME_PUSHED="$(cd repos/${REPO}/ && git log -1 --format=%cd )"
+TIME_PUSHED="$(cd repos/${REPO}/ &&  git log -1 --date=iso8601-strict --format=%cd )"
 
-TIME_UPDATED="$(extract_field updated_at)"
+TIME_UPDATED="$(extract_field updated_at | sed 's/Z/\+00:00/')"
 
 echo "<table>"
 echo "<tr><td>URL:</td><td><a href=\"${URL}\" target=\"_blank\">${URL}</a></td></tr>"
