@@ -25,13 +25,12 @@ DEFAULT_BRANCH="$(extract_field default_branch)"
 IS_ARCHIVED="$(extract_field archived)"
 
 HAS_CODEOWNERS="$([[ -f repos/${REPO}/CODEOWNERS ]] && echo ✅ || echo ❌)"
+HAS_MAINTAINERS="$([[ -f repos/${REPO}/MAINTAINERS ]] && echo ✅ || echo ❌)"
 HAS_GITHUB_ACTIONS="$([[ -d repos/${REPO}/.github/workflows/ ]] && echo ✅ || echo ❌)"
 
 NO_CIRCLE="$([[ -d repos/${REPO}/.circleci/ ]] && echo ❌ || echo ✅)"
 NO_TRAVIS="$([[ -f repos/${REPO}/.travis.yml ]] && echo ❌ || echo ✅)"
 NO_PULLAPPROVE="$([[ -f repos/${REPO}/.pullapprove.yml ]] && echo ❌ || echo ✅)"
-NO_MAINTAINERS="$([[ -f repos/${REPO}/MAINTAINERS ]] && echo ❌ || echo ✅)"
-NO_MAILMAP="$([[ -f repos/${REPO}/.mailmap ]] && echo ❌ || echo ✅)"
 NO_GLIDE="$([[ -f repos/${REPO}/glide.yaml ]] && echo ❌ || echo ✅)"
 
 TIME_CREATED="$(extract_field created_at | sed 's/Z/\+00:00/')"
@@ -66,12 +65,11 @@ else
 fi
 
 echo "<tr><td>Has CODEOWNERS?</td><td>${HAS_CODEOWNERS}</b></td></tr>"
+echo "<tr><td>Has MAINTAINERS?</td><td>${HAS_MAINTAINERS}</b></td></tr>"
 echo "<tr><td>Has GitHub Actions?</td><td>${HAS_GITHUB_ACTIONS}</b></td></tr>"
 echo "<tr><td>CircleCI removed?</td><td>${NO_CIRCLE}</b></td></tr>"
 echo "<tr><td>Travis CI removed?</td><td>${NO_TRAVIS}</b></td></tr>"
 echo "<tr><td>PullApprove removed?</td><td>${NO_PULLAPPROVE}</b></td></tr>"
-echo "<tr><td>MAINTAINERS removed?</td><td>${NO_MAINTAINERS}</b></td></tr>"
-echo "<tr><td>Mailmap removed?</td><td>${NO_MAILMAP}</b></td></tr>"
 echo "<tr><td>Glide removed?</td><td>${NO_GLIDE}</b></td></tr>"
 
 echo "</table><br/>"
